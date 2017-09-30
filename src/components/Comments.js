@@ -39,15 +39,21 @@ class Comments extends React.Component {
     event.preventDefault()
     stitchClient.login().then(() => {
       stitchClient.executeNamedPipeline('AddComment', {
-        post_id: this.props.post.id,
+        post: this.props.post,
         owner_id: stitchClient.authedId(),
         comment: this.state.comment,
         author: this.state.author,
         timestamp: new Date()
       })
+        .then(result => {
+          console.log(result)
+        })
         .then(this.loadComments)
         .then(() => {
           this.setState({ comment: '', author: '' })
+        })
+        .catch(err => {
+          console.log(err)
         })
     })
   }
