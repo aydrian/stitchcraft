@@ -46,10 +46,7 @@ class Comments extends React.Component {
       })
       .then(this.loadComments)
       .then(() => {
-        this.setState({newComment: {
-          comment: '',
-          author: ''
-        }})
+        this.setState({ comment: '', author: '' })
       })
   }
 
