@@ -30,24 +30,26 @@ class Comments extends React.Component {
   }
 
   loadComments () {
-    db.collection('comments').find({postId: this.props.post.id}).then(comments => {
+    db.collection('comments').find({post_id: this.props.post.id}).then(comments => {
       this.setState({ comments })
     })
   }
 
   handleAddComment (event) {
     event.preventDefault()
-    db.collection('comments')
-      .insert({postId: this.props.post.id,
+    stitchClient.login().then(() => {
+      stitchClient.executeNamedPipeline('AddComment', {
+        post_id: this.props.post.id,
         owner_id: stitchClient.authedId(),
         comment: this.state.comment,
         author: this.state.author,
         timestamp: new Date()
       })
-      .then(this.loadComments)
-      .then(() => {
-        this.setState({ comment: '', author: '' })
-      })
+        .then(this.loadComments)
+        .then(() => {
+          this.setState({ comment: '', author: '' })
+        })
+    })
   }
 
   componentWillMount () {
