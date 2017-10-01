@@ -30,7 +30,7 @@ class Comments extends React.Component {
   }
 
   loadComments () {
-    db.collection('comments').find({post_id: this.props.post.id}).then(comments => {
+    db.collection('comments').find({post_id: this.props.post.frontmatter.path}).then(comments => {
       this.setState({ comments })
     })
   }
