@@ -71,9 +71,21 @@ class Comments extends React.Component {
           <div>No comments yet. Be the first to add one!</div>
         )}
         {this.state.comments.map(comment => {
-          return (<div key={comment._id.toString()}>
-            {comment.comment}<br />
-          By {comment.author} on {comment.timestamp ? comment.timestamp.toString() : ''}
+          return (<div key={comment._id.toString()} style={{
+            padding: `5px`,
+            marginBottom: `10px`
+          }}>
+            <div style={{
+              marginLeft: `10px`,
+              fontSize: `14px`
+            }}>{comment.author} said on {comment.timestamp ? comment.timestamp.toString() : ''}</div>
+            <div style={{
+              borderRadius: `10px 10px 10px 10px`,
+              MozBorderRadius: `10px 10px 10px 10px`,
+              WebkitBorderRadius: `10px 10px 10px 10px`,
+              border: `5px double #000000`,
+              padding: `5px`
+            }}>{comment.comment}</div>
           </div>)
         })}
         <hr />
