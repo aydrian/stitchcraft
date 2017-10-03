@@ -279,11 +279,9 @@ Now that we have a comments component that interacts with a Stitch application, 
 import Comments from '../components/Comments'
 ```
 
-Add the component under the <Bio> component passing the post object as a prop.
+Add the component under the `<Bio>` component passing the post object as a prop.
 
-```
-<Comments post={post} />
-```
+`<Comments post={post} />`
 
 That’s it. You can now fire up the Gatsby development server, open http://localhost:8000 in your browser and try it out.
 ```
