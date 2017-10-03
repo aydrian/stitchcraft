@@ -1,8 +1,5 @@
-# gatsby-starter-blog
-Gatsby starter for creating a blog
-
-Install this starter (assuming Gatsby is installed) by running from your CLI:
-`gatsby new gatsby-blog https://github.com/gatsbyjs/gatsby-starter-blog`
+# Stitchcraft
+A GatsbyJS blog with comments and notications provided by [MongoDB Stitch](https://www.mongodb.com/cloud/stitch) and [SparkPost](https://www.sparkpost.com)
 
 ## Running in development
 `gatsby develop`

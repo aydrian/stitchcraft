@@ -65,7 +65,7 @@ class Comments extends React.Component {
   render () {
     return (
       <div className='comments'>
-        <h2>Comments</h2>
+        <h3>Comments</h3>
         <hr />
         {this.state.comments.length === 0 && (
           <div>No comments yet. Be the first to add one!</div>
@@ -89,23 +89,26 @@ class Comments extends React.Component {
           </div>)
         })}
         <hr />
-        <label>
-          Your Name:
-          <input
-            name='author'
-            type='text'
-            value={this.state.author}
-            onChange={this.handleInputChange} />
-        </label><br />
-        <label>
-          Add comment:
-          <input
-            name='comment'
-            type='text'
-            value={this.state.comment}
-            onChange={this.handleInputChange} />
-        </label><br />
-        <input type='submit' onClick={this.handleAddComment} />
+        <form>
+          <legend>Leave a comment...</legend>
+          <label>
+            Your Name:
+            <input
+              name='author'
+              type='text'
+              value={this.state.author}
+              onChange={this.handleInputChange} />
+          </label><br />
+          <label>
+            Add comment:
+            <input
+              name='comment'
+              type='text'
+              value={this.state.comment}
+              onChange={this.handleInputChange} />
+          </label><br />
+          <input type='submit' onClick={this.handleAddComment} />
+        </form>
       </div>
     )
   }
