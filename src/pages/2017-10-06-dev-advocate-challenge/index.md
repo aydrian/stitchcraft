@@ -78,7 +78,7 @@ In order to trigger the email notification, we’re going to need to create a ne
   "%%args.url.host": "api.sparkpost.com",
   "%%args.body.recipients.address": {
     "%in": [
-      <your email addresses>
+      // your email addresses
     ]
   }
 }
@@ -171,11 +171,11 @@ Now we can issue a post to the SparkPost service and pass along the information 
   "body": {
     "recipients": [
       {
-        "address": <whitelisted email address>
+        "address": // whitelisted email address
       }
     ],
     "content": {
-      "template_id": <your template-id>
+      "template_id": // your template-id
     },
     "substitution_data": "%%vars.substitution_data"
   }
@@ -243,7 +243,7 @@ Create a new file in the `/src/components` folder called `Comments.js`. In order
 
 ```
 import { StitchClient } from 'mongodb-stitch'
-const stitchClient = new StitchClient('<App ID>')
+const stitchClient = new StitchClient('/* App ID */')
 ```
 
 If you want to read from the blog database, you can access it using the stitchClient.
@@ -262,7 +262,7 @@ You can also execute your named pipeline.
 ```
 stitchClient.login().then(() => {
       stitchClient.executeNamedPipeline('AddComment', {
-        <args>
+        // args
       })
         .then(result => {
           console.log(result)
