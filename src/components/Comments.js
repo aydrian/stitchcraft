@@ -1,12 +1,11 @@
 import React from 'react'
-import { StitchClient } from 'mongodb-stitch'
+import { StitchClientFactory } from 'mongodb-stitch'
 
 // Import typefaces
 import 'typeface-montserrat'
 import 'typeface-merriweather'
 
-const stitchClient = new StitchClient('stitchcraft-ogeho')
-const db = stitchClient.service('mongodb', 'mongodb-atlas').db('blog')
+let stitchClientPromise = StitchClientFactory.create('stitchcraft-ogeho')
 
 class Comments extends React.Component {
   constructor (props) {
@@ -30,21 +29,30 @@ class Comments extends React.Component {
   }
 
   loadComments () {
-    db.collection('comments').find({post_id: this.props.post.frontmatter.path}).then(comments => {
-      this.setState({ comments })
-    })
+    stitchClientPromise.then(stitchClient => stitchClient.login()
+      .then(authedId => {
+        console.log(`logged in as:  + ${authedId}`)
+        let db = stitchClient.service('mongodb', 'mongodb-atlas').db('blog')
+        db.collection('comments').find({post_id: this.props.post.frontmatter.path}).execute()
+        .then(comments => {
+          this.setState({ comments })
+        })
+      })
+      .catch(e => console.log('error: ', e))
+    )
   }
 
   handleAddComment (event) {
     event.preventDefault()
-    stitchClient.login().then(() => {
-      stitchClient.executeNamedPipeline('AddComment', {
-        post: this.props.post,
-        owner_id: stitchClient.authedId(),
-        comment: this.state.comment,
-        author: this.state.author,
-        timestamp: new Date()
-      })
+    stitchClientPromise.then(stitchClient => stitchClient.login()
+      .then(authedId => {
+        stitchClient.executeFunction('AddComment', {
+          post: this.props.post,
+          owner_id: authedId,
+          comment: this.state.comment,
+          author: this.state.author,
+          timestamp: new Date()
+        })
         .then(result => {
           console.log(result)
         })
@@ -55,11 +63,12 @@ class Comments extends React.Component {
         .catch(err => {
           console.log(err)
         })
-    })
+      })
+    )
   }
 
   componentWillMount () {
-    stitchClient.login().then(this.loadComments)
+    this.loadComments()
   }
 
   render () {
