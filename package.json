@@ -26,7 +26,7 @@
     "gatsby-transformer-remark": "^1.7.31",
     "gatsby-transformer-sharp": "^1.6.18",
     "lodash": "^4.17.5",
-    "mongodb-stitch": "^3.0.1",
+    "mongodb-stitch": "^3.0.5",
     "react-responsive-grid": "^0.3.3",
     "typeface-merriweather": "^0.0.35",
     "typeface-montserrat": "^0.0.37",
